@@ -26,6 +26,7 @@ esbuild(
     entry_point = "worker.ts",
     format = "esm",
     minify = True,
+    sourcemap = "inline",
     target = "es2020",
     visibility = ["//:__pkg__"],
     deps = [":geoip_worker_ts"],
@@ -43,6 +44,7 @@ rust_binary(
     deps = [
         "//src/wasm/geoip/raze:lzma_rs",
         "//src/wasm/geoip/raze:maxminddb",
+        "//src/wasm/geoip/raze:once_cell",
         "//src/wasm/geoip/raze:wee_alloc",
         "@rules_rust//wasm_bindgen/raze:wasm_bindgen",
     ],

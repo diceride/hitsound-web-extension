@@ -11,6 +11,7 @@ crate-type = ["cdylib"]
 js-sys = "0.3.57"
 lzma-rs = "0.2.0"
 maxminddb = "0.23.0"
+once_cell = "1.10.0"
 proc-macro2 = "1.0.28"
 serde = "1.0.136"
 wasm-bindgen = "0.2.80"

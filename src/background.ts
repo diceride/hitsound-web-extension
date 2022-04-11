@@ -37,13 +37,9 @@ const tabCache: Map<number, TabEntry> = new Map();
   const [sounds, options] = await Promise.all([
     // Load the sounds configuration
     fetch('/assets/data/sounds.json')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.sounds as Sound[];
-      }),
-    new Promise<Options>(function (resolve) {
+      .then((response) => response.json())
+      .then((data) => data.sounds as Sound[]),
+    new Promise<Options>((resolve) => {
       // Restore options from the chrome local storage
       chrome.storage.local.get(defaultOptions, (options) => {
         if (chrome.runtime.lastError) {
@@ -61,7 +57,7 @@ const tabCache: Map<number, TabEntry> = new Map();
   audioPlayer.volume = options.muted ? 0 : options.volume;
 
   // Create a new Geo IP worker
-  const geoIpWorker = new Worker('/wasm/geoip/worker_bundle.js', {
+  const geoIpWorker = new Worker('/wasm/geoip/geoip_worker_bundle.js', {
     type: 'module'
   });
 
@@ -86,7 +82,7 @@ const tabCache: Map<number, TabEntry> = new Map();
       audioPlayer.volume = action.muted ? 0 : action.volume;
 
       // Save options to the chrome local storage
-      return new Promise<void>(function (resolve) {
+      return new Promise<void>((resolve) => {
         chrome.storage.local.set(
           { volume: action.volume, muted: action.muted },
           () => {
@@ -95,8 +91,6 @@ const tabCache: Map<number, TabEntry> = new Map();
         );
       });
     }
-
-    return null;
   });
 
   // Chrome storage event listener
@@ -143,10 +137,8 @@ const tabCache: Map<number, TabEntry> = new Map();
     // Query all chrome tabs
     chrome.tabs.query({}, (tabs) => {
       tabs
-        .filter(function (tab) {
-          return tab.id && tab.url && !tabCache.has(tab.id);
-        })
-        .forEach(function (tab) {
+        .filter((tab) => tab.id && tab.url && !tabCache.has(tab.id))
+        .forEach((tab) => {
           // Update the chrome tab in the cache
           tabCache.set(tab.id!, { host: new URL(tab.url!).host, count: 0 });
         });
@@ -161,8 +153,8 @@ const tabCache: Map<number, TabEntry> = new Map();
 
     geoIpWorker.addEventListener(
       'message',
-      (error) => {
-        console.log('Message received from worker', error);
+      (message) => {
+        console.log('Message received from worker', message);
         clearTimeout(handle);
 
         resolve();
@@ -171,7 +163,7 @@ const tabCache: Map<number, TabEntry> = new Map();
     );
 
     handle = setTimeout(() => {
-      reject(Error('Timeout'));
+      reject(Error('Timeout: Failed to load the GeoLite2 database'));
     }, 120000);
 
     geoIpWorker.postMessage({
@@ -209,6 +201,13 @@ const tabCache: Map<number, TabEntry> = new Map();
 
                 // Update the chrome tab in the cache
                 tabCache.set(details.tabId, tabEntry);
+
+                geoIpWorker.postMessage({
+                  action: 'lookup',
+                  data: {
+                    ip: details.ip
+                  }
+                });
 
                 // Set the chrome tab badge text
                 chrome.browserAction.setBadgeText({

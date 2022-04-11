@@ -14,7 +14,11 @@
     "declaration": true,
     "sourceMap": false,
     "skipLibCheck": true,
-    "lib": ["dom", "es2020", "es2020.promise"],
+    "lib": [
+      "dom",
+      "es2020",
+      "es2020.promise"
+    ],
     "rootDirs": [
       ".",
       "bazel-out/k8-fastbuild/bin",

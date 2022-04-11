@@ -26,33 +26,29 @@ export interface WorkerEvent extends MessageEvent {
   readonly data: Action;
 }
 
-onmessage = async function (event: WorkerEvent) {
-  switch (event.data.action) {
-    case 'init':
-      await init(fetch('/wasm/geoip/geoip_wasm_bindgen_bg.wasm'));
+onmessage = async function onMessage(event: WorkerEvent) {
+  if (event.data.action === 'init') {
+    await init(fetch('/wasm/geoip/geoip_wasm_bindgen_bg.wasm'));
 
-      // Load the GeoLite2 database (MMDB)
-      const uint8View = await fetch(event.data.data.filepath! as string)
-        .then((response) => {
-          if (!response.ok) {
-            throw Error('HTTP error, status = ' + response.status);
-          }
+    // Load the GeoLite2 database (MMDB)
+    const uint8View = await fetch(event.data.data.filepath! as string)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`fetch API error, status: "${response.status}"`);
+        }
 
-          return response.arrayBuffer();
-        })
-        .then((arrayBuffer) => new Uint8Array(arrayBuffer));
+        return response.arrayBuffer();
+      })
+      .then((arrayBuffer) => new Uint8Array(arrayBuffer));
 
-      init_reader(uint8View);
+    init_reader(uint8View);
 
-      postMessage(undefined);
-      break;
+    postMessage(undefined);
+  } else if (event.data.action === 'lookup') {
+    const city = lookup(event.data.data.ip! as string);
 
-    case 'lookup':
-      const city = lookup(event.data.data.ipAddress! as string);
-
-      postMessage(city);
-      break;
+    postMessage(city);
+  } else {
+    throw Error(`Unknown action: "${event.data.action}"`);
   }
-
-  throw Error();
 };

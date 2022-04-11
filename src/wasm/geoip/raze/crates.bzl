@@ -76,6 +76,7 @@ def raze_fetch_remote_crates():
         name = "raze__ipnetwork__0_18_0",
         url = "https://crates.io/api/v1/crates/ipnetwork/0.18.0/download",
         type = "tar.gz",
+        sha256 = "4088d739b183546b239688ddbc79891831df421773df95e236daf7867866d355",
         strip_prefix = "ipnetwork-0.18.0",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.ipnetwork-0.18.0.bazel"),
     )
@@ -85,6 +86,7 @@ def raze_fetch_remote_crates():
         name = "raze__js_sys__0_3_57",
         url = "https://crates.io/api/v1/crates/js-sys/0.3.57/download",
         type = "tar.gz",
+        sha256 = "671a26f820db17c2a2750743f1dd03bafd15b98c9f30c7c2628c024c05d73397",
         strip_prefix = "js-sys-0.3.57",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.js-sys-0.3.57.bazel"),
     )
@@ -134,6 +136,7 @@ def raze_fetch_remote_crates():
         name = "raze__maxminddb__0_23_0",
         url = "https://crates.io/api/v1/crates/maxminddb/0.23.0/download",
         type = "tar.gz",
+        sha256 = "fe2ba61113f9f7a9f0e87c519682d39c43a6f3f79c2cc42c3ba3dda83b1fa334",
         strip_prefix = "maxminddb-0.23.0",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.maxminddb-0.23.0.bazel"),
     )
@@ -156,6 +159,16 @@ def raze_fetch_remote_crates():
         sha256 = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3",
         strip_prefix = "memory_units-0.4.0",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.memory_units-0.4.0.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__once_cell__1_10_0",
+        url = "https://crates.io/api/v1/crates/once_cell/1.10.0/download",
+        type = "tar.gz",
+        sha256 = "87f3e037eac156d1775da914196f0f37741a274155e34a0b7e427c35d2a2ecb9",
+        strip_prefix = "once_cell-1.10.0",
+        build_file = Label("//src/wasm/geoip/raze/remote:BUILD.once_cell-1.10.0.bazel"),
     )
 
     maybe(
@@ -183,6 +196,7 @@ def raze_fetch_remote_crates():
         name = "raze__serde__1_0_136",
         url = "https://crates.io/api/v1/crates/serde/1.0.136/download",
         type = "tar.gz",
+        sha256 = "ce31e24b01e1e524df96f1c2fdd054405f8d7376249a5110886fb4b658484789",
         strip_prefix = "serde-1.0.136",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.serde-1.0.136.bazel"),
     )
@@ -192,6 +206,7 @@ def raze_fetch_remote_crates():
         name = "raze__serde_derive__1_0_136",
         url = "https://crates.io/api/v1/crates/serde_derive/1.0.136/download",
         type = "tar.gz",
+        sha256 = "08597e7152fcd306f41838ed3e37be9eaeed2b61c42e2117266a554fab4662f9",
         strip_prefix = "serde_derive-1.0.136",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.serde_derive-1.0.136.bazel"),
     )
@@ -221,6 +236,7 @@ def raze_fetch_remote_crates():
         name = "raze__wasm_bindgen__0_2_80",
         url = "https://crates.io/api/v1/crates/wasm-bindgen/0.2.80/download",
         type = "tar.gz",
+        sha256 = "27370197c907c55e3f1a9fbe26f44e937fe6451368324e009cba39e139dc08ad",
         strip_prefix = "wasm-bindgen-0.2.80",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.wasm-bindgen-0.2.80.bazel"),
     )
@@ -230,6 +246,7 @@ def raze_fetch_remote_crates():
         name = "raze__wasm_bindgen_backend__0_2_80",
         url = "https://crates.io/api/v1/crates/wasm-bindgen-backend/0.2.80/download",
         type = "tar.gz",
+        sha256 = "53e04185bfa3a779273da532f5025e33398409573f348985af9a1cbf3774d3f4",
         strip_prefix = "wasm-bindgen-backend-0.2.80",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.wasm-bindgen-backend-0.2.80.bazel"),
     )
@@ -239,6 +256,7 @@ def raze_fetch_remote_crates():
         name = "raze__wasm_bindgen_macro__0_2_80",
         url = "https://crates.io/api/v1/crates/wasm-bindgen-macro/0.2.80/download",
         type = "tar.gz",
+        sha256 = "17cae7ff784d7e83a2fe7611cfe766ecf034111b49deb850a3dc7699c08251f5",
         strip_prefix = "wasm-bindgen-macro-0.2.80",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.wasm-bindgen-macro-0.2.80.bazel"),
     )
@@ -248,6 +266,7 @@ def raze_fetch_remote_crates():
         name = "raze__wasm_bindgen_macro_support__0_2_80",
         url = "https://crates.io/api/v1/crates/wasm-bindgen-macro-support/0.2.80/download",
         type = "tar.gz",
+        sha256 = "99ec0dc7a4756fffc231aab1b9f2f578d23cd391390ab27f952ae0c9b3ece20b",
         strip_prefix = "wasm-bindgen-macro-support-0.2.80",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.wasm-bindgen-macro-support-0.2.80.bazel"),
     )
@@ -257,6 +276,7 @@ def raze_fetch_remote_crates():
         name = "raze__wasm_bindgen_shared__0_2_80",
         url = "https://crates.io/api/v1/crates/wasm-bindgen-shared/0.2.80/download",
         type = "tar.gz",
+        sha256 = "d554b7f530dee5964d9a9468d95c1f8b8acae4f282807e7d27d4b03099a46744",
         strip_prefix = "wasm-bindgen-shared-0.2.80",
         build_file = Label("//src/wasm/geoip/raze/remote:BUILD.wasm-bindgen-shared-0.2.80.bazel"),
     )

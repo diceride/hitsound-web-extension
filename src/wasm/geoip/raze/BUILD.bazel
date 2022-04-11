@@ -40,6 +40,15 @@ alias(
 )
 
 alias(
+    name = "once_cell",
+    actual = "@raze__once_cell__1_10_0//:once_cell",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
     name = "proc_macro2",
     actual = "@raze__proc_macro2__1_0_28//:proc_macro2",
     tags = [

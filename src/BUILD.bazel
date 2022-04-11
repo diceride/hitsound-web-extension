@@ -70,6 +70,7 @@ esbuild(
     name = "background_bundle",
     entry_point = "background.ts",
     format = "esm",
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":background_ts",
@@ -81,6 +82,7 @@ esbuild(
     entry_point = "background.ts",
     format = "esm",
     minify = True,
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":background_ts",
@@ -103,6 +105,7 @@ esbuild(
     name = "options_bundle",
     entry_point = "options.ts",
     format = "esm",
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":options_library",
@@ -114,6 +117,7 @@ esbuild(
     entry_point = "background.ts",
     format = "esm",
     minify = True,
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":background_ts",
@@ -158,6 +162,7 @@ esbuild(
     name = "popup_bundle",
     entry_point = "popup.ts",
     format = "esm",
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":popup_library",
@@ -169,6 +174,7 @@ esbuild(
     entry_point = "popup.ts",
     format = "esm",
     minify = True,
+    sourcemap = "inline",
     target = "es2020",
     deps = [
         ":popup_library",

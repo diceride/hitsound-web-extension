@@ -1,15 +1,16 @@
-//use maxminddb::geoip2::City;
-use std::cell::RefCell;
+use std::borrow::Borrow;
+use maxminddb::geoip2::City;
+use once_cell::sync::OnceCell;
+use std::sync::Mutex;
 use std::io::BufReader;
-//use std::net::IpAddr;
+use std::net::IpAddr;
+use std::str::FromStr;
 use wasm_bindgen::prelude::*;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-thread_local! {
-    static READER: RefCell<Option<maxminddb::Reader<Vec<u8>>>> = RefCell::new(None);
-}
+static READER: OnceCell<maxminddb::Reader<Vec<u8>>> = OnceCell::new();
 
 #[wasm_bindgen]
 extern "C" {
@@ -19,8 +20,6 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn init_reader(bytes: &[u8]) -> Result<(), JsValue> {
-    //let mut reader = READER.lock().unwrap();
-
     let mut buf_reader = BufReader::with_capacity(bytes.len(), bytes);
 
     let decode_options = lzma_rs::decompress::Options {
@@ -34,18 +33,19 @@ pub fn init_reader(bytes: &[u8]) -> Result<(), JsValue> {
         |err| JsValue::from(format!("{:?} (capacity: {:})", err, buf_reader.capacity())),
     )?;
 
-    //READER.with(maxminddb::Reader::from_source(&data).unwrap());
+    READER.set(maxminddb::Reader::from_source(data).unwrap());
 
     Ok(())
 }
 
 #[wasm_bindgen]
-pub fn lookup(_ip_address: String) -> Result<String, JsValue> {
-    //let city: City = READER.lookup(IpAddr::from_str(&ip_address).unwrap()).unwrap();
+pub fn lookup(ip_addr: String) -> Result<String, JsValue> {
+    log(&ip_addr);
+    let ip_addr = IpAddr::from_str(&ip_addr).unwrap();
 
-    //log(&format!("city: {:?}", city));
+    let city: City = READER.get().unwrap().lookup(ip_addr).unwrap();
 
-    Ok("test".to_string())
+    Ok(format!("{:?}", city))
 }
 
 fn main() {}

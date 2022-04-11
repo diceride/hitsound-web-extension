@@ -100,12 +100,8 @@ export class RpcObserver {
   ): Promise<T[]> {
     return Promise.all<T>(
       Array.from(this._ports.values())
-        .filter((port) => {
-          return port.name === portName;
-        })
-        .map((port) => {
-          return createAsyncMessage<T>(port, action, timeout);
-        })
+        .filter((port) => port.name === portName)
+        .map((port) => createAsyncMessage<T>(port, action, timeout))
     );
   }
 }
@@ -161,7 +157,7 @@ export class RpcService {
 function createUUIDv4(): string {
   return new Array(4)
     .fill(0)
-    .map(function () {
+    .map(() => {
       return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(16);
     })
     .join('-');
@@ -172,7 +168,7 @@ function createAsyncMessage<T>(
   action: Action,
   timeout: number
 ): Promise<T> {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     let handle: number | undefined;
 
     // Create a new UUIDv4
