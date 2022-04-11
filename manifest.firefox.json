@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "author": "Open Source Browser Hits",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "permissions": ["http://*/*", "https://*/*", "storage", "webRequest"],
+  "incognito": "spanning",
+  "content_security_policy": "script-src 'self'; object-src 'self'; img-src 'self' data:;",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "__MSG_name__"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true,
+    "open_in_tab": false
+  }
+}

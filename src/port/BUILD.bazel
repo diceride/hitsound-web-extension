@@ -1,0 +1,19 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+ts_project(
+    name = "port_ts",
+    srcs = [
+        "action.ts",
+        "index.ts",
+        "rpc.ts",
+    ],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    visibility = [
+        "//src:__pkg__",
+        "//src:__subpackages__",
+    ],
+    deps = [
+        "@npm//@types/chrome",
+    ],
+)

@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Sound",
+    "description": ""
+  },
+  "settings": {
+    "message": "Instellingen",
+    "description": ""
+  },
+  "mute": {
+    "message": "Dempen (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Dempen opheffen (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Standaard",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "Slagwerk",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "Kosmos",
+    "description": ""
+  }
+}

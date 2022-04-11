@@ -1,0 +1,41 @@
+name: CI
+on:
+  push: {}
+  pull_request: {}
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            bazel-cache: ~/.cache/bazel
+          - os: macos-latest
+            bazel-cache: /var/tmp/_bazel_runner/cache
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        run: echo "$PRIVATE_KEY" > private.pem
+        env:
+          PRIVATE_KEY: ${{secrets.TEST_KEY}}
+      - name: Mount bazel cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ matrix.bazel-cache }}
+          key: ${{ runner.os }}-bazel-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-bazel-
+      - name: Run bazel npm install
+        run: bazel run @nodejs_host//:npm install
+      - name: Run bazel check
+        run: npm run bazel:format-check && npm run bazel:lint
+      - name: Run bazel build
+        run: bazel build //... --announce_rc --noshow_progress --verbose_failures --local_ram_resources=7000
+      - name: Run bazel test
+        run: bazel test //... --announce_rc --noshow_progress --verbose_failures --local_ram_resources=7000 --test_output=all
+      - name: Run actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ${{env.BAZEL_BIN}}/chromium_debug_web_ext.artifact
+            ${{env.BAZEL_BIN}}/firefox_debug_web_ext.artifact

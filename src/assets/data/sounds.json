@@ -1,0 +1,69 @@
+{
+  "sounds": [
+    {
+      "id": "beepo",
+      "tracks": ["beepo.wav"]
+    },
+    {
+      "id": "default",
+      "tracks": ["default.wav"]
+    },
+    {
+      "id": "electro",
+      "tracks": ["electro1.wav", "electro2.wav", "electro3.wav"]
+    },
+    {
+      "id": "notes",
+      "tracks": [
+        "note1.wav",
+        "note2.wav",
+        "note3.wav",
+        "note4.wav",
+        "note5.wav",
+        "note6.wav",
+        "note7.wav",
+        "note7b.wav",
+        "note8.wav",
+        "note9.wav"
+      ]
+    },
+    {
+      "id": "percussion",
+      "tracks": [
+        "percussion1.wav",
+        "percussion2.wav",
+        "percussion3.wav",
+        "percussion4.wav",
+        "percussion5.wav"
+      ]
+    },
+    {
+      "id": "retro",
+      "tracks": [
+        "retro1.wav",
+        "retro2.wav",
+        "retro3.wav",
+        "retro4.wav",
+        "retro5.wav"
+      ]
+    },
+    {
+      "id": "space",
+      "tracks": ["space.wav"]
+    },
+    {
+      "id": "squasher",
+      "tracks": ["squasher.wav"]
+    },
+    {
+      "id": "vortex",
+      "tracks": [
+        "vortex1.wav",
+        "vortex2.wav",
+        "vortex3.wav",
+        "vortex4.wav",
+        "vortex5.wav"
+      ]
+    }
+  ]
+}

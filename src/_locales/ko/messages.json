@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "음",
+    "description": ""
+  },
+  "settings": {
+    "message": "설정",
+    "description": ""
+  },
+  "mute": {
+    "message": "음소거(m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "음소거 해제(m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "기본",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "타악기",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "우주",
+    "description": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Som",
+    "description": ""
+  },
+  "settings": {
+    "message": "Definições",
+    "description": ""
+  },
+  "mute": {
+    "message": "Desativar som (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Reactivar som (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Padrão",
+    "description": ""
+  }
+}

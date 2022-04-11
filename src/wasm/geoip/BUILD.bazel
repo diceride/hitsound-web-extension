@@ -1,0 +1,64 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
+load("@npm//@bazel/esbuild:index.bzl", "esbuild")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rustfmt_test")
+load("//bazel/wasm_bindgen:wasm_bindgen.bzl", "rust_wasm_bindgen")
+
+ts_project(
+    name = "geoip_worker_ts",
+    srcs = ["worker.ts"],
+    declaration = True,
+    tsconfig = "//:worker_tsconfig",
+    deps = [":geoip_wasm_bindgen"],
+)
+
+esbuild(
+    name = "geoip_worker_bundle",
+    entry_point = "worker.ts",
+    format = "esm",
+    target = "es2020",
+    visibility = ["//:__pkg__"],
+    deps = [":geoip_worker_ts"],
+)
+
+esbuild(
+    name = "geoip_worker_bundle.min",
+    entry_point = "worker.ts",
+    format = "esm",
+    minify = True,
+    target = "es2020",
+    visibility = ["//:__pkg__"],
+    deps = [":geoip_worker_ts"],
+)
+
+rust_binary(
+    name = "geoip_wasm_bin",
+    srcs = ["src/lib.rs"],
+    crate_features = ["default"],
+    edition = "2021",
+    rustc_flags = [
+        "-C",
+        "opt-level=3",
+    ],
+    deps = [
+        "//src/wasm/geoip/raze:lzma_rs",
+        "//src/wasm/geoip/raze:maxminddb",
+        "//src/wasm/geoip/raze:wee_alloc",
+        "@rules_rust//wasm_bindgen/raze:wasm_bindgen",
+    ],
+)
+
+rust_wasm_bindgen(
+    name = "geoip_wasm_bindgen",
+    bindgen_flags = [
+        "--target",
+        "web",
+    ],
+    visibility = ["//:__pkg__"],
+    wasm_file = ":geoip_wasm_bin",
+)
+
+rustfmt_test(
+    name = "geoip_fmt_test",
+    targets = [":geoip_wasm_bin"],
+)

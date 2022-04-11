@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Hang",
+    "description": ""
+  },
+  "settings": {
+    "message": "Beállítások",
+    "description": ""
+  },
+  "mute": {
+    "message": "Némítás (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Némítás feloldása (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Alapértelmezett",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "Ütőhangszerek",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "Világegyetem",
+    "description": ""
+  }
+}

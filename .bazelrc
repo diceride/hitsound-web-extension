@@ -1,0 +1,6 @@
+run --color=yes
+build --color=yes
+build --incompatible_strict_action_env
+
+# Print test logs for failed tests
+test --test_output=errors

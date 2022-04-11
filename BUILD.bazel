@@ -1,0 +1,79 @@
+load("@build_bazel_rules_web_ext//:index.bzl", "web_ext")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "tsconfig.json",
+    "jest.config.js",
+])
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//src:__subpackages__"],
+)
+
+ts_config(
+    name = "test_tsconfig",
+    src = "tsconfig.test.json",
+    deps = [":tsconfig.json"],
+)
+
+ts_config(
+    name = "worker_tsconfig",
+    src = "tsconfig.worker.json",
+    deps = [":tsconfig.json"],
+)
+
+filegroup(
+    name = "devmode_js",
+    srcs = [
+        "//src:background_bundle",
+        "//src:options_bundle",
+        "//src:popup_bundle",
+        "//src/wasm/geoip:geoip_worker_bundle",
+    ],
+)
+
+filegroup(
+    name = "prodmode_js",
+    srcs = [
+        "//src:background_bundle.min",
+        "//src:options_bundle.min",
+        "//src:popup_bundle.min",
+        "//src/wasm/geoip:geoip_worker_bundle.min",
+    ],
+)
+
+filegroup(
+    name = "data",
+    srcs = [
+        ":LICENSE",
+        "//src:resources",
+        "//src:styles_sass",
+        "//src:templates",
+        "//src/wasm/geoip:geoip_wasm_bindgen",
+    ],
+)
+
+web_ext(
+    name = "chromium_debug_web_ext",
+    srcs = [
+        "data",
+        "devmode_js",
+    ],
+    manifest = ":manifest.chromium.json",
+    strip_prefix = "/src",
+    zip = False,
+)
+
+web_ext(
+    name = "firefox_debug_web_ext",
+    srcs = [
+        "data",
+        "devmode_js",
+    ],
+    manifest = ":manifest.firefox.json",
+    strip_prefix = "/src",
+)

@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "音",
+    "description": ""
+  },
+  "settings": {
+    "message": "设置",
+    "description": ""
+  },
+  "mute": {
+    "message": "静音 (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "取消静音 (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "默认",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "击球仪",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "空间",
+    "description": ""
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2020",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "pretty": true,
+    "strict": true,
+    "declaration": true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "lib": ["dom", "es2020", "es2020.promise"],
+    "rootDirs": [
+      ".",
+      "bazel-out/k8-fastbuild/bin",
+      "bazel-out/darwin-fastbuild/bin",
+      "bazel-out/darwin_arm64-fastbuild/bin"
+    ]
+  },
+  "exclude": ["**/*.spec.ts"]
+}

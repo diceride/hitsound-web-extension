@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Zvuk",
+    "description": ""
+  },
+  "settings": {
+    "message": "Nastavení",
+    "description": ""
+  },
+  "mute": {
+    "message": "Ztlumit (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Zrušit ztlumení (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Výchozí",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "Poklep",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "Kosmos",
+    "description": ""
+  }
+}

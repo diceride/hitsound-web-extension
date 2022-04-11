@@ -1,0 +1,14 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+ts_project(
+    name = "actions_ts",
+    srcs = [
+        "background.ts",
+        "index.ts",
+        "popup.ts",
+    ],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    visibility = ["//src:__pkg__"],
+    deps = ["//src/port:port_ts"],
+)

@@ -1,0 +1,62 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Sound",
+    "description": ""
+  },
+  "settings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "mute": {
+    "message": "Mute (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Unmute (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Default",
+    "description": ""
+  },
+  "sound_beepo": {
+    "message": "Beepo",
+    "description": ""
+  },
+  "sound_electro": {
+    "message": "Electro",
+    "description": ""
+  },
+  "sound_notes": {
+    "message": "Notes",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "Percussion",
+    "description": ""
+  },
+  "sound_retro": {
+    "message": "Retro",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "Space",
+    "description": ""
+  },
+  "sound_squasher": {
+    "message": "Squasher",
+    "description": ""
+  },
+  "sound_vortex": {
+    "message": "Vortex",
+    "description": ""
+  }
+}

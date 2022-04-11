@@ -1,0 +1,26 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("//bazel/jest:jest.bzl", "jest_test")
+
+ts_project(
+    name = "elements_ts",
+    srcs = ["volume-control.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    visibility = ["//src:__pkg__"],
+)
+
+js_library(
+    name = "elements_js",
+    package_name = "elements-lib",
+    named_module_srcs = [":elements_ts"],
+    deps = [":elements_ts"],
+)
+
+jest_test(
+    name = "test",
+    testonly = True,
+    srcs = glob(["*.spec.ts"]),
+    jest_config = "//:jest.config.js",
+    deps = [":elements_ts"],
+)

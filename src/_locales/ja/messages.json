@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "音",
+    "description": ""
+  },
+  "settings": {
+    "message": "設定",
+    "description": ""
+  },
+  "mute": {
+    "message": "ミュート（消音）（m）",
+    "description": ""
+  },
+  "unmute": {
+    "message": "ミュート解除（m）",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "既定",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "打楽器",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "宇宙",
+    "description": ""
+  }
+}

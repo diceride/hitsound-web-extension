@@ -1,0 +1,38 @@
+{
+  "name": {
+    "message": "Browser Hits",
+    "description": ""
+  },
+  "description": {
+    "message": "Plays a hit sound ♫♪ on each web request",
+    "description": ""
+  },
+  "sound": {
+    "message": "Sound",
+    "description": ""
+  },
+  "settings": {
+    "message": "Einstellungen",
+    "description": ""
+  },
+  "mute": {
+    "message": "Stummschalten (m)",
+    "description": ""
+  },
+  "unmute": {
+    "message": "Stummschaltung aufheben (m)",
+    "description": ""
+  },
+  "sound_default": {
+    "message": "Standard",
+    "description": ""
+  },
+  "sound_percussion": {
+    "message": "Schlagzeug",
+    "description": ""
+  },
+  "sound_space": {
+    "message": "Weltraum",
+    "description": ""
+  }
+}

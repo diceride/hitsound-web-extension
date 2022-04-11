@@ -1,0 +1,184 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
+load("@npm//@bazel/esbuild:index.bzl", "esbuild")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("//bazel/jest:jest.bzl", "jest_test")
+
+package(default_visibility = ["//:__pkg__"])
+
+filegroup(
+    name = "resources",
+    srcs = glob([
+        "_locales/**/*.json",
+        "assets/*",
+        "assets/**/*",
+    ]),
+)
+
+filegroup(
+    name = "templates",
+    srcs = glob(["*.html"]),
+)
+
+sass_binary(
+    name = "styles_sass",
+    src = "styles.scss",
+    output_name = "styles.css",
+    output_style = "compressed",
+    sourcemap = False,
+)
+
+ts_project(
+    name = "config_ts",
+    srcs = ["config.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+)
+
+js_library(
+    name = "config_js",
+    package_name = "config-lib",
+    named_module_srcs = [":config_ts"],
+    deps = [":config_ts"],
+)
+
+ts_project(
+    name = "audio_player_ts",
+    srcs = ["audio-player.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        ":config_js",
+    ],
+)
+
+ts_project(
+    name = "background_ts",
+    srcs = ["background.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        ":audio_player_ts",
+        ":config_js",
+        "//src/actions:actions_ts",
+        "//src/port:port_ts",
+        "@npm//@types/chrome",
+    ],
+)
+
+esbuild(
+    name = "background_bundle",
+    entry_point = "background.ts",
+    format = "esm",
+    target = "es2020",
+    deps = [
+        ":background_ts",
+    ],
+)
+
+esbuild(
+    name = "background_bundle.min",
+    entry_point = "background.ts",
+    format = "esm",
+    minify = True,
+    target = "es2020",
+    deps = [
+        ":background_ts",
+    ],
+)
+
+ts_project(
+    name = "options_library",
+    srcs = ["options.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        ":audio_player_ts",
+        ":config_ts",
+        "@npm//@types/chrome",
+    ],
+)
+
+esbuild(
+    name = "options_bundle",
+    entry_point = "options.ts",
+    format = "esm",
+    target = "es2020",
+    deps = [
+        ":options_library",
+    ],
+)
+
+esbuild(
+    name = "options_bundle.min",
+    entry_point = "background.ts",
+    format = "esm",
+    minify = True,
+    target = "es2020",
+    deps = [
+        ":background_ts",
+    ],
+)
+
+ts_project(
+    name = "game_ts",
+    srcs = ["game.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        "@npm//@babylonjs/core",
+        "@npm//@babylonjs/gui",
+    ],
+)
+
+ts_project(
+    name = "state_ts",
+    srcs = ["state.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+)
+
+ts_project(
+    name = "popup_library",
+    srcs = ["popup.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        ":config_ts",
+        ":game_ts",
+        ":state_ts",
+        "//src/actions:actions_ts",
+        "//src/elements:elements_ts",
+        "//src/port:port_ts",
+        "@npm//@types/chrome",
+    ],
+)
+
+esbuild(
+    name = "popup_bundle",
+    entry_point = "popup.ts",
+    format = "esm",
+    target = "es2020",
+    deps = [
+        ":popup_library",
+    ],
+)
+
+esbuild(
+    name = "popup_bundle.min",
+    entry_point = "popup.ts",
+    format = "esm",
+    minify = True,
+    target = "es2020",
+    deps = [
+        ":popup_library",
+    ],
+)
+
+jest_test(
+    name = "test",
+    testonly = True,
+    srcs = glob(["*.spec.ts"]),
+    jest_config = "//:jest.config.js",
+    deps = [":state_ts"],
+)
