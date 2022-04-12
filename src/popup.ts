@@ -26,7 +26,7 @@ import { state, stateObservable } from './state';
 
 document.addEventListener(
   'DOMContentLoaded',
-  async function () {
+  async () => {
     // Get the chrome tab id
     const tabId = await new Promise<number>(function (resolve) {
       // Parse the query string of the window URL
@@ -113,8 +113,8 @@ document.addEventListener(
     );
 
     // Restore options from the chrome local storage
-    await new Promise<void>(function (resolve) {
-      chrome.storage.local.get(defaultOptions, function ({ volume, muted }) {
+    await new Promise<void>((resolve) => {
+      chrome.storage.local.get(defaultOptions, ({ volume, muted }) => {
         if (chrome.runtime.lastError) {
           console.debug(chrome.runtime.lastError.message);
           return;

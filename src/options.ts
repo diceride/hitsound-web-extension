@@ -19,7 +19,7 @@ import { defaultOptions, Sound } from './config';
 
 document.addEventListener(
   'DOMContentLoaded',
-  async function () {
+  async () => {
     document.querySelector('label[for="sound"]')!.textContent =
       chrome.i18n.getMessage('sound');
 
