@@ -1,6 +1,5 @@
 use maxminddb::geoip2::City;
 use once_cell::sync::OnceCell;
-use std::borrow::Borrow;
 use std::io::BufReader;
 use std::net::IpAddr;
 use std::str::FromStr;
@@ -32,7 +31,7 @@ pub fn init_reader(bytes: &[u8]) -> Result<(), JsValue> {
         |err| JsValue::from(format!("{:?} (capacity: {:})", err, buf_reader.capacity())),
     )?;
 
-    READER.set(maxminddb::Reader::from_source(data).unwrap());
+    let _ = READER.set(maxminddb::Reader::from_source(data).unwrap());
 
     Ok(())
 }

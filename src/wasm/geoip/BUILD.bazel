@@ -1,7 +1,7 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
 load("@npm//@bazel/esbuild:index.bzl", "esbuild")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
-load("@rules_rust//rust:defs.bzl", "rust_binary", "rustfmt_test")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_clippy", "rustfmt_test")
 load("//bazel/wasm_bindgen:wasm_bindgen.bzl", "rust_wasm_bindgen")
 
 ts_project(
@@ -58,6 +58,12 @@ rust_wasm_bindgen(
     ],
     visibility = ["//:__pkg__"],
     wasm_file = ":geoip_wasm_bin",
+)
+
+rust_clippy(
+    name = "geoip_clippy",
+    testonly = True,
+    deps = [":geoip_wasm_bin"],
 )
 
 rustfmt_test(
