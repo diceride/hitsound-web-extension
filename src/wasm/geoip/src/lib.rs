@@ -1,7 +1,6 @@
-use std::borrow::Borrow;
 use maxminddb::geoip2::City;
 use once_cell::sync::OnceCell;
-use std::sync::Mutex;
+use std::borrow::Borrow;
 use std::io::BufReader;
 use std::net::IpAddr;
 use std::str::FromStr;
