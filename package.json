@@ -11,8 +11,8 @@
     "bazel:lint-fix": "npm run bazel:format --lint=fix"
   },
   "dependencies": {
-    "@babylonjs/core": "^4.2.0",
-    "@babylonjs/gui": "^4.2.0"
+    "@babylonjs/core": "^5.2.0",
+    "@babylonjs/gui": "^5.2.0"
   },
   "devDependencies": {
     "@bazel/buildifier": "^5.0.1",

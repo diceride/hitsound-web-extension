@@ -60,6 +60,7 @@ document.addEventListener(
 
     // Initialize the game
     await game.init();
+    game.updateCounter(0);
 
     const volumeControlElement = document.querySelector(
       'volume-control'

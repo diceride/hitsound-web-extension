@@ -15,10 +15,11 @@
  * along with Browser Hits. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import '@babylonjs/core/Animations';
+import '@babylonjs/core/Audio/audioSceneComponent';
 import '@babylonjs/core/Loading/Plugins/babylonFileLoader';
 import '@babylonjs/core/Loading/sceneLoader';
 import '@babylonjs/core/Materials/PBR/pbrMaterial';
-import '@babylonjs/core/Audio/audioSceneComponent';
 
 import { Sound } from '@babylonjs/core/Audio/sound';
 import { Skeleton } from '@babylonjs/core/Bones/skeleton';
@@ -202,9 +203,6 @@ export class Game {
     return this._assetsManager.loadAsync().then(() => {
       this._createHud();
 
-      // Update the game counter
-      this.updateCounter(0);
-
       // Render the scene
       this._scene.getEngine().runRenderLoop(this._render.bind(this));
     });
@@ -259,6 +257,7 @@ export class Game {
    * @param count A numeric count to render on the scene
    */
   updateCounter(count: number) {
+    console.log('test1', this._scene.beginAnimation);
     if (count === 0) {
       // Reset the luck counter
       this._luckCounter = 0;
@@ -293,7 +292,9 @@ export class Game {
         numberMesh.skeleton = this._skeletons
           .get('number_default')!
           .clone(numberMesh.name);
+        console.log('test2', numberMesh._scene.beginAnimation);
         numberMesh.setEnabled(true);
+        console.log('test3', numberMesh.getEngine().scenes[0].beginAnimation);
 
         let idleAnimation = numberMesh.skeleton!.beginAnimation('idle', true);
 
