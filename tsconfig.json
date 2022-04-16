@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "target": "es2020",
+    "target": "es2021",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "pretty": true,
@@ -14,11 +14,7 @@
     "declaration": true,
     "sourceMap": false,
     "skipLibCheck": true,
-    "lib": [
-      "dom",
-      "es2020",
-      "es2020.promise"
-    ],
+    "lib": ["dom", "es2020", "es2020.promise"],
     "rootDirs": [
       ".",
       "bazel-out/k8-fastbuild/bin",

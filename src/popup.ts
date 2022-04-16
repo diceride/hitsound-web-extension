@@ -15,8 +15,6 @@
  * along with Browser Hits. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import './elements/volume-control';
-
 import { syncAction, updateCountAction, updateVolumeAction } from './actions';
 import { defaultOptions } from './config';
 import { HTMLVolumeControlElement } from './elements/volume-control';
@@ -28,7 +26,7 @@ document.addEventListener(
   'DOMContentLoaded',
   async () => {
     // Get the chrome tab id
-    const tabId = await new Promise<number>(function (resolve) {
+    const tabId = await new Promise<number>((resolve) => {
       // Parse the query string of the window URL
       const searchParams = new URLSearchParams(window.location.search);
 
@@ -38,9 +36,7 @@ document.addEventListener(
         // Query the current chrome tab id
         chrome.tabs.query(
           { active: true, currentWindow: true },
-          function (tabs: chrome.tabs.Tab[]) {
-            resolve(tabs[0].id!);
-          }
+          (tabs: chrome.tabs.Tab[]) => resolve(tabs[0].id!)
         );
       }
     });

@@ -47,6 +47,7 @@ import { MeshButton3D } from '@babylonjs/gui/3D/controls/meshButton3D';
 import { StackPanel3D } from '@babylonjs/gui/3D/controls/stackPanel3D';
 import { GUI3DManager } from '@babylonjs/gui/3D/gui3DManager';
 import { Vector3WithInfo } from '@babylonjs/gui/3D/vector3WithInfo';
+import { MeshBuilder } from '@babylonjs/core';
 
 /**
  * Game controller

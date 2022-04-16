@@ -17,7 +17,8 @@
 
 import { syncAction, updateCountAction, updateVolumeAction } from './actions';
 import { AudioPlayer } from './audio-player';
-import { defaultOptions, Options, Sound } from './config';
+import type { Options, Sound } from './config';
+import { defaultOptions } from './config';
 import { RpcObserver } from './port';
 
 /**

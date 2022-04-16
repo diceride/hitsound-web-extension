@@ -15,7 +15,8 @@
  * along with Browser Hits. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { defaultOptions, Sound } from './config';
+import type { Sound } from './config';
+import { defaultOptions } from './config';
 
 document.addEventListener(
   'DOMContentLoaded',
@@ -37,21 +38,18 @@ document.addEventListener(
 
     // Load the sounds configuration
     await fetch('/assets/data/sounds.json')
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        return data.sounds as Sound[];
-      })
-      .then(function (sounds: Sound[]) {
+      .then((response) => response.json())
+      .then((data) => data.sounds as Sound[])
+      .then((sounds: Sound[]) => {
         const locale = chrome.i18n.getUILanguage();
 
         sounds
-          .sort(function (a, b) {
-            // Sort the sounds lexicographically by using the browser's language
+          .sort((a, b) => {
+            // Sort the sounds lexicographically by using the preferred
+            // language of the client
             return a.id.localeCompare(b.id, locale);
           })
-          .reduce(function (sounds, sound) {
+          .reduce((sounds, sound) => {
             // Put the default sound to the top of the list
             if (sound.id === defaultOptions.soundId) {
               return [sound, ...sounds];
@@ -59,7 +57,7 @@ document.addEventListener(
 
             return [...sounds, sound];
           }, [] as Sound[])
-          .forEach(function (sound) {
+          .forEach((sound) => {
             const optionElement = document.createElement(
               'option'
             ) as HTMLOptionElement;
@@ -70,12 +68,12 @@ document.addEventListener(
             soundSelectElement.appendChild(optionElement);
           });
       })
-      .catch(function (err) {
-        console.error(err);
+      .catch((error) => {
+        console.error(error);
       });
 
     // Restore options from the chrome local storage
-    chrome.storage.local.get(defaultOptions, function (options) {
+    chrome.storage.local.get(defaultOptions, (options) => {
       if (chrome.runtime.lastError) {
         console.debug(chrome.runtime.lastError.message);
         return;

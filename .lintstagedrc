@@ -1,3 +1,5 @@
 {
-  "**/*.{js,ts,md}": "prettier --write --config ./prettier.config.js"
+  "**/*.{html,js,json,md,scss,ts}": "prettier --write --config ./prettier.config.js",
+  "**/*.{bzl,bazel}": "buildifier --lint=warn",
+  "WORKSPACE": "buildifier --lint=warn"
 }

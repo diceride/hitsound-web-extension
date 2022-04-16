@@ -27,8 +27,10 @@ jobs:
           restore-keys: ${{ runner.os }}-bazel-
       - name: Run bazel npm install
         run: bazel run @nodejs_host//:npm install
-      - name: Run bazel check
-        run: npm run bazel:format-check && npm run bazel:lint
+      - name: Prettier
+        run: npx --no-install prettier -w --config ./prettier.config.js "**/*.{html,js,json,md,scss,ts}"
+      - name: Buildifier
+        run: npx --no-install buildifier --lint=warn -r src BUILD.bazel WORKSPACE
       - name: Run bazel build
         run: bazel build //... --announce_rc --noshow_progress --verbose_failures --local_ram_resources=7000
       - name: Run bazel test
